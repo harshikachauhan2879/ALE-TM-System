@@ -162,6 +162,9 @@
     </div>
     @else
         <!-- Guest Auth Layout -->
+        <button onclick="toggleTheme()" class="guest-theme-toggle" title="Toggle Theme">
+            <span id="theme-icon-guest">☀️</span>
+        </button>
         <div class="auth-container">
             @yield('auth_content')
         </div>
@@ -191,13 +194,16 @@
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
+            const iconGuest = document.getElementById('theme-icon-guest');
             if(html.getAttribute('data-theme') === 'dark') {
                 html.setAttribute('data-theme', 'light');
-                icon.textContent = '🌙';
+                if(icon) icon.textContent = '🌙';
+                if(iconGuest) iconGuest.textContent = '🌙';
                 localStorage.setItem('theme', 'light');
             } else {
                 html.setAttribute('data-theme', 'dark');
-                icon.textContent = '☀️';
+                if(icon) icon.textContent = '☀️';
+                if(iconGuest) iconGuest.textContent = '☀️';
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -207,12 +213,15 @@
             const savedTheme = localStorage.getItem('theme');
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
+            const iconGuest = document.getElementById('theme-icon-guest');
             if(savedTheme === 'light') {
                 html.setAttribute('data-theme', 'light');
                 if(icon) icon.textContent = '🌙';
+                if(iconGuest) iconGuest.textContent = '🌙';
             } else {
                 html.setAttribute('data-theme', 'dark');
                 if(icon) icon.textContent = '☀️';
+                if(iconGuest) iconGuest.textContent = '☀️';
             }
         });
     </script>
